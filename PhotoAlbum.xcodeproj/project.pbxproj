@@ -68,7 +68,6 @@
 			children = (
 				58CFA403249B0A6200B37E7D /* Resource */,
 				58CFA40A249B0A6200B37E7D /* Extension */,
-				58CFA402249B0A6200B37E7D /* Model */,
 				58CFA407249B0A6200B37E7D /* View */,
 				58CFA405249B0A6200B37E7D /* Controller */,
 				58CFA3EE249B0A2A00B37E7D /* AppDelegate.swift */,
@@ -79,13 +78,6 @@
 				58CFA3FC249B0A2B00B37E7D /* Info.plist */,
 			);
 			path = PhotoAlbum;
-			sourceTree = "<group>";
-		};
-		58CFA402249B0A6200B37E7D /* Model */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		58CFA403249B0A6200B37E7D /* Resource */ = {

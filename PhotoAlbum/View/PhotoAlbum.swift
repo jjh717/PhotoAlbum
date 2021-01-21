@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-protocol PhotoAlbumDelegate {
+protocol PhotoAlbumDelegate: class {
     func getImages(images: [UIImage])
     func openCamera()
 }
@@ -17,7 +17,7 @@ protocol PhotoAlbumDelegate {
 class PhotoAlbum: UICollectionView {
     var arrSelectedIndex = [IndexPath]()
     var results: PHFetchResult<PHAsset>?
-    var photoAlbumDelegate: PhotoAlbumDelegate?
+    weak var photoAlbumDelegate: PhotoAlbumDelegate?
       
     var selectMode = false
     var lastSelectedCell = IndexPath()
@@ -32,7 +32,8 @@ class PhotoAlbum: UICollectionView {
             switch status {
             case .authorized:
                 DispatchQueue.main.async { [weak self] in
-                    self?.setDelegate()
+                    guard let `self` = self else { return }
+                    self.setDelegate()
                 }
             case .denied, .restricted:
                 print("Not allowed")
@@ -140,7 +141,8 @@ class PhotoAlbum: UICollectionView {
                     }
                 }
             }
-            DispatchQueue.main.async {
+            DispatchQueue.main.async { [weak self] in
+                guard let `self` = self else { return }
                 print("Image Process Complete")
                 self.photoAlbumDelegate?.getImages(images: imageArr)
             }

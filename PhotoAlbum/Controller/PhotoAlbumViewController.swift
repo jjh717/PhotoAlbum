@@ -8,13 +8,13 @@
 
 import UIKit
 
-protocol PhotoAlbumViewControllerDelegate {
+protocol PhotoAlbumViewControllerDelegate: class {
     func getImage(images: [UIImage])
 }
 
 class PhotoAlbumViewController: UIViewController {
     @IBOutlet var photoAlbum: PhotoAlbum!
-    var delegate: PhotoAlbumViewControllerDelegate?
+    weak var delegate: PhotoAlbumViewControllerDelegate?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,7 +22,7 @@ class PhotoAlbumViewController: UIViewController {
     }
     
     @IBAction func okButtonClick(_ sender: Any) {
-         self.photoAlbum.getImageFromAsset()
+         photoAlbum.getImageFromAsset()
     }
     
     @IBAction func backButtonClick(_ sender: Any) {
@@ -32,7 +32,7 @@ class PhotoAlbumViewController: UIViewController {
 
 extension PhotoAlbumViewController: PhotoAlbumDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func getImages(images: [UIImage]) {
-        self.delegate?.getImage(images: images)
+        delegate?.getImage(images: images)
         self.navigationController?.popViewController(animated: true)
     }
     
@@ -63,7 +63,7 @@ extension PhotoAlbumViewController: PhotoAlbumDelegate, UIImagePickerControllerD
         if error != nil {
 
         } else {
-            self.photoAlbum.getAllPhotos()
+            photoAlbum.getAllPhotos()
         }
     }
 }
